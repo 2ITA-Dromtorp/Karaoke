@@ -1,0 +1,83 @@
+.karaokeWrapper {
+  width: 100vw;
+  height: 200vh;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.karaokeHeader {
+  width: 100%;
+  height: 20%;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.songWrapper {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  padding-top: 2vh;
+  height: 160%;
+  width: 100%;
+  background-color: yellow;
+}
+
+.karaokeSongs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: fit-content;
+  width: 100%;
+  /* padding-top: 3vh; */
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(238,155,176,1) 100%);
+}
+
+.karaokeCard {
+
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 45vh;
+  width: 70%;
+  margin-bottom: 1vh;
+  background-color: #222725;
+}
+.karaokeCard img {
+  width: 95%;
+  padding: 1vh;
+
+}
+
+.tester {
+  width: 100vw;
+  height: 20vh;
+  margin-top: 10vh;
+}
+
+@media screen and (orientation: landscape) {
+  * {
+    overflow: hidden;
+  }
+  .vibeCheck {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100vh;
+    width: 100vw;
+  }
+  .karaokeWrapper {
+    display: none;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .vibeCheck {
+    display: none;
+  }
+}
