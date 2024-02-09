@@ -28,9 +28,12 @@ run().catch(console.dir);
 // KODEN UNDER DENNE KOMMENTAREN FUNKER IKKE!
 // LA KODEN VÆRE KOMMENTERT UT!
 
-// //Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
-// const img1 = fs.readFileSync('./test.png');
+//Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
+
+// app.get('/test', (req, res) => {
+//   const img1 = fs.readFileSync('./test.png');
 // const img2 = fs.readFileSync('./test.png');
+// app
 // computeSSIM(img1, img2, (err, score) => {
 //   if (err) {
 //     console.error('Error computing SSIM:', err);
@@ -46,5 +49,7 @@ run().catch(console.dir);
 //     console.log('Spectrograms are different.');
 //   }
 // });
+
+// })
 
 // //express.json({limit: '20mb'})
