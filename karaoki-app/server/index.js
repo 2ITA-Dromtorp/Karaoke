@@ -1,18 +1,21 @@
 const express = require('express');
+const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://chenalexanderfuglestad:8mM18XRvxzkXj3Vu@cluster0.bjn32lb.mongodb.net/?retryWrites=true&w=majority";
 const fs = require('fs');
 const { computeSSIM } = require('image-ssim');
 // const { default: App } = require('../src/App');
 const app = express();
-const cors = require('cors');
+app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
-app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json({ limit: '500mb' }));
 
 
-const PORT = 3009;
+
 
 console.log("aefipafpu")
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -37,14 +40,21 @@ console.log("aefipafpu")
 // }
 // run().catch(console.dir);
 
-
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+  console.log("aefipafpu")
+});
 
 app.post('http://localhost:3009/tester', async (req, res) => {
 console.log("running")
+const b = req.body;
+console.log(data);
   try {
 
     const b = req.body;
     console.log(b);
+    res.status(200).json({ message: 'Success' });
+    res.send('Success');
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
@@ -52,9 +62,12 @@ console.log("running")
     // releaseDbConnection(req, res);
   }
 });
-
+const PORT = 3009;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
+  app.get("*", (req, res) => {
+    console.log("aefipafpu")
+  })
 });
 
 
