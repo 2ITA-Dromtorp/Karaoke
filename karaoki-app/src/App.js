@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
 import Scoreboard from './components/scoreboard'
+import axios from 'axios';
 
 function App() {
 
@@ -41,9 +42,10 @@ const handleclick = async () => {
   const ctx = canvas.getContext('2d');
   const img = new Image();
   img.src = imgExport;
-  let dataToSend = {
-    test: "test",
-  };
+  // let dataToSend = {
+  //   imgExport: imgExport[0],
+  // };
+  let dataToSend = imgExport[0]
 
   img.onload = function() {
     canvas.width = img.width;
@@ -58,7 +60,7 @@ const handleclick = async () => {
       // Construct the data to send
 // Add the compressed image blob to the dataToSend object
 
-      fetch('http://localhost:3009/tester', {
+      fetch('http://localhost:6969/tester', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -81,6 +83,15 @@ const handleclick = async () => {
       });
     }, 'image/jpeg', 0.2); // Use the appropriate image format and quality
   };
+};
+
+const getTester = async () => {
+  await axios
+    .get("http://localhost:6969/test")
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => console.log(error));
 };
 
   return (
@@ -112,6 +123,7 @@ const handleclick = async () => {
           
         <div id='waveform'> </div>
         <button onClick={() => handleclick()}>Play</button>  
+        <button onClick={() => getTester()}>Play</button>  
         <h1>test</h1>
         </div>
         <Scoreboard />

@@ -14,7 +14,16 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json({ limit: '500mb' }));
 
-
+app.use((req, res, next) => {
+  let data = '';
+  req.on('data', chunk => {
+    data += chunk;
+  });
+  req.on('end', () => {
+    console.log('Request payload size:', data.length);
+    next();
+  });
+});
 
 
 console.log("aefipafpu")
@@ -45,14 +54,16 @@ app.get('/', (req, res) => {
   console.log("aefipafpu")
 });
 
-app.post('http://localhost:3009/tester', async (req, res) => {
+app.post('/tester', async (req, res) => {
 console.log("running")
-const b = req.body;
-console.log(data);
+// const b = req.body;
+// console.log(data);
+
+
   try {
 
-    const b = req.body;
-    console.log(b);
+    // const b = req.body;
+    console.log(req);
     res.status(200).json({ message: 'Success' });
     res.send('Success');
   } catch (err) {
@@ -62,13 +73,26 @@ console.log(data);
     // releaseDbConnection(req, res);
   }
 });
-const PORT = 3009;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-  app.get("*", (req, res) => {
-    console.log("aefipafpu")
-  })
-});
+
+// app.get('/test', async (req, res) => {
+//   try {
+//       res.send("Ja det funker");
+//   } catch (err) {
+//       console.error(err);
+//       res.status(500).send('Internal Server Error');
+//   }
+// });
+
+
+// const PORT = 3009;
+// app.listen(PORT, () => {
+//   console.log(`Server listening on port ${PORT}`);
+//   app.get("*", (req, res) => {
+//     console.log("aefipafpu")
+//   })
+// });
+const port = process.env.PORT || 6969;
+app.listen(port, () => console.log(`Server started on port ${port}`));
 
 
 
@@ -78,26 +102,28 @@ app.listen(PORT, () => {
 
 //Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
-// app.get('/test', (req, res) => {
-//   const img1 = fs.readFileSync('./test.png');
-// const img2 = fs.readFileSync('./test.png');
-// app
-// computeSSIM(img1, img2, (err, score) => {
-//   if (err) {
-//     console.error('Error computing SSIM:', err);
-//     return;
-//   }
+app.get('/test', (req, res) => {
+const img1 = fs.readFileSync('./test.png');
+const img2 = fs.readFileSync('./test.png');
+app
+computeSSIM(img1, img2, (err, score) => {
+  if (err) {
+    console.error('Error computing SSIM:', err);
+    return;
+  }
 
-//   console.log('SSIM:', score);
+  console.log('SSIM:', score);
 
-//   const threshold = 0.9; //Hvor anderledes de er fra hverandre, Andreas
-//   if (score >= threshold) {
-//     console.log('Spectrograms are alike.');
-//   } else {
-//     console.log('Spectrograms are different.');
-//   }
-// });
+  const threshold = 0.9; //Hvor anderledes de er fra hverandre, Andreas
+  if (score >= threshold) {
+    console.log('Spectrograms are alike.');
+    res.send('Spectrograms are alike.');
+  } else {
+    console.log('Spectrograms are different.');
+    res.send('Spectrograms are different.');
+  }
+});
 
-// })
+})
 
 
