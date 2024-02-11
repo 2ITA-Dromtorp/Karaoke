@@ -13,6 +13,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json({ limit: '500mb' }));
+const testimg = './testimg.png';
 
 app.use((req, res, next) => {
   let data = '';
@@ -63,9 +64,15 @@ console.log("running")
   try {
 
     // const b = req.body;
-    console.log(req);
-    res.status(200).json({ message: 'Success' });
-    res.send('Success');
+    console.log(req.body);
+    if (req = true) {
+      console.log("lang")
+      
+    }
+    const b = req;
+    // console.log(b) 
+    // res.status(200).json({ message: 'Success' });
+    res.send("Ja det funker");
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
@@ -103,12 +110,13 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 //Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
 app.get('/test', (req, res) => {
-const img1 = fs.readFileSync('./test.png');
-const img2 = fs.readFileSync('./test.png');
+const img1 = fs.readFileSync(testimg);
+const img2 = fs.readFileSync(testimg);
 app
 computeSSIM(img1, img2, (err, score) => {
   if (err) {
     console.error('Error computing SSIM:', err);
+    res.send('Error computing SSIM: ' + err);
     return;
   }
 

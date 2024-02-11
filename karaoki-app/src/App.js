@@ -63,7 +63,7 @@ const handleclick = async () => {
       fetch('http://localhost:6969/tester', {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/html; charset=utf-8"
         },
         body: JSON.stringify(dataToSend) // Stringify the entire dataToSend object once
       })
