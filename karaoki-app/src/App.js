@@ -60,13 +60,15 @@ const handleclick = async () => {
       // Construct the data to send
 // Add the compressed image blob to the dataToSend object
 
-      fetch('http://localhost:6969/tester', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "text/html; charset=utf-8"
-        },
-        body: JSON.stringify(dataToSend) // Stringify the entire dataToSend object once
-      })
+      // fetch('http://localhost:6969/tester', {
+      //   method: 'POST',
+      //   headers: {
+      //     "Content-Type": "text/html; charset=utf-8"
+      //   },
+      //   body: JSON.stringify(dataToSend) // Stringify the entire dataToSend object once
+      // })
+      console.log(dataToSend)
+      axios.post("http://localhost:6969/tester", {"data": dataToSend})
       .then(async (res) => {
         // if (res.status === 404) {
         //   console.error('Endpoint not found. Check server configuration.');
@@ -74,8 +76,7 @@ const handleclick = async () => {
         // } else if (!res.ok) {
         //   throw new Error(`HTTP error! Status: ${res.status}`);
         // }
-        const data = await res;
-        console.log(data);
+        console.log(res.data);
         // console.log(dataToSend)
       })
       .catch(error => {
