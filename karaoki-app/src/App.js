@@ -68,7 +68,7 @@ const handleclick = async () => {
       //   body: JSON.stringify(dataToSend) // Stringify the entire dataToSend object once
       // })
       console.log(dataToSend)
-      axios.post("http://localhost:6969/tester", {"data": dataToSend})
+      axios.post("/tester", {"data": dataToSend})
       .then(async (res) => {
         // if (res.status === 404) {
         //   console.error('Endpoint not found. Check server configuration.');
@@ -88,7 +88,7 @@ const handleclick = async () => {
 
 const getTester = async () => {
   await axios
-    .get("http://localhost:6969/test")
+    .get("/test")
     .then(response => {
       console.log(response)
     })

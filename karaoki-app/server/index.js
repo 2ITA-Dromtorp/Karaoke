@@ -4,7 +4,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://chenalexanderfuglestad:8mM18XRvxzkXj3Vu@cluster0.bjn32lb.mongodb.net/?retryWrites=true&w=majority";
 const fs = require('fs');
 const { computeSSIM, compare, score } = require('image-ssim');
-const { ssim } = require('ssim.js');
+const { ssim, load } = require('ssim.js');
+const ImageSSIM = require('image-ssim');
 // const { default: App } = require('../src/App');
 const app = express();
 
@@ -102,9 +103,25 @@ app.get('/test', (req, res) => {
 const img1 = fs.readFileSync("./testimg.jpg");
 const img2 = fs.readFileSync("./testimg2.jpg");
 // let score = 0;
-let k1 = 0
-let k2 = 0
-console.log(score)
+// let k1 = 0
+// let k2 = 0
+// let windowSize = 8
+
+
+// import ssim from 'ssim.js';
+
+// try {
+//   const out = ssim('./test.jpg', './img2.jpg')
+//   console.log(`SSIM: ${out.mssim} (${out.performance}ms)`)
+// } catch (err) {
+//   console.error('Error generating SSIM', err);
+// }
+
+const ssimIndex = ssim(img1, img2);
+
+return ssimIndex;
+
+// console.log(score)
 
 
 // ssim(img1, img2)
@@ -112,15 +129,32 @@ console.log(score)
 // .catch(err => console.error('Error generating SSIM', err));
 
 
-compare(img1, img2,(err, score) => {
-  
-  console.log('SSIM:', score);
-  if (err) {
-    console.error('Error comparing images:', err);
-  }
-  console.log(IResult)
-  return IResult;
-})
+
+
+    // it('should compare same images', function(done) {
+    //     load('./test/images/wheel-pixelized.png', './test/images/wheel-pixelized.png', function(images){
+    //         var ssim = SSIM.compare(images[0], images[1]);
+    //         assert(ssim.ssim === 1);
+    //         done();
+    //     });
+    // });
+// });
+
+// compare()
+
+
+
+// compare(img1, img2,(err, score, k1, k2, windowSize) => {
+//   // console.log("kjører")
+//   console.log(ImageSSIM.IResult);
+//   // console.log('SSIM:', score);
+
+//   if (err) {
+//     console.error('Error comparing images:', err);
+//   }
+// return;
+// })
+// console.log(IResult)
 // computeSSIM(img1, img2, (err, score) => {
 //   if (err) {
 //     console.error('Error computing SSIM:', err);
@@ -129,7 +163,7 @@ compare(img1, img2,(err, score) => {
 //   }
 
 
-
+console.log("soffjsoh")
   const threshold = 0.9; //Hvor anderledes de er fra hverandre, Andreas
   if (score >= threshold) {
     console.log('Spectrograms are alike.');
@@ -138,8 +172,9 @@ compare(img1, img2,(err, score) => {
     console.log('Spectrograms are different.');
     res.send('Spectrograms are different.');
   }
-});
+  
+;
 
-
+})
 
 
