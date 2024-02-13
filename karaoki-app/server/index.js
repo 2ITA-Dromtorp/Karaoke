@@ -3,7 +3,8 @@ const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://chenalexanderfuglestad:8mM18XRvxzkXj3Vu@cluster0.bjn32lb.mongodb.net/?retryWrites=true&w=majority";
 const fs = require('fs');
-const { computeSSIM } = require('image-ssim');
+const { computeSSIM, compare, score } = require('image-ssim');
+const { ssim } = require('ssim.js');
 // const { default: App } = require('../src/App');
 const app = express();
 
@@ -85,23 +86,7 @@ app.post('/tester', async (req, res) => {
   }
 });
 
-// app.get('/test', async (req, res) => {
-//   try {
-//       res.send("Ja det funker");
-//   } catch (err) {
-//       console.error(err);
-//       res.status(500).send('Internal Server Error');
-//   }
-// });
 
-
-// const PORT = 3009;
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port ${PORT}`);
-//   app.get("*", (req, res) => {
-//     console.log("aefipafpu")
-//   })
-// });
 const port = process.env.PORT || 6969;
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
@@ -116,15 +101,34 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 app.get('/test', (req, res) => {
 const img1 = fs.readFileSync("./testimg.jpg");
 const img2 = fs.readFileSync("./testimg2.jpg");
+// let score = 0;
+let k1 = 0
+let k2 = 0
+console.log(score)
 
-computeSSIM(img1, img2, (err, score) => {
-  if (err) {
-    console.error('Error computing SSIM:', err);
-    res.send('Error computing SSIM: ' + err);
-    return;
-  }
 
+// ssim(img1, img2)
+// .then(out => console.log(out.mssim))
+// .catch(err => console.error('Error generating SSIM', err));
+
+
+compare(img1, img2,(err, score) => {
+  
   console.log('SSIM:', score);
+  if (err) {
+    console.error('Error comparing images:', err);
+  }
+  console.log(IResult)
+  return IResult;
+})
+// computeSSIM(img1, img2, (err, score) => {
+//   if (err) {
+//     console.error('Error computing SSIM:', err);
+//     res.send('Error computing SSIM: ' + err);
+//     return;
+//   }
+
+
 
   const threshold = 0.9; //Hvor anderledes de er fra hverandre, Andreas
   if (score >= threshold) {
@@ -136,6 +140,6 @@ computeSSIM(img1, img2, (err, score) => {
   }
 });
 
-})
+
 
 
