@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './App.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import NavBar from './navBar';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <>
+    <div className='vibeCheck'>
+    <h1>VENNLIGST SNU ENHETEN DIN SÅNN AT DEN ER I PORTRETT MODUS!!!</h1>
+    </div>
+    <div className="Appen">
     <NavBar/>
     <App />
+    </div>
     </>
 );
 

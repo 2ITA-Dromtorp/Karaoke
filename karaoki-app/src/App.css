@@ -71,7 +71,8 @@
     height: 100vh;
     width: 100vw;
   }
-  .karaokeWrapper {
+
+  .appen {
     display: none;
   }
 }

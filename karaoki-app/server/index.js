@@ -8,6 +8,8 @@ const { ssim, load } = require('ssim.js');
 const ImageSSIM = require('image-ssim');
 // const { default: App } = require('../src/App');
 const app = express();
+const PNG = require('pngjs').PNG;
+const pixelmatch = require('pixelmatch');
 
 app.use(cors());
 app.use(express.static('build'));
@@ -100,8 +102,18 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 //Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
 app.get('/test', (req, res) => {
-const img1 = fs.readFileSync("./testimg.jpg");
-const img2 = fs.readFileSync("./testimg2.jpg");
+// const img1 = fs.readFileSync("./testimg.jpg");
+// const img2 = fs.readFileSync("./testimg2.jpg");
+const img1 = PNG.sync.read(fs.readFileSync('./testimg.jpg'));
+const img2 = PNG.sync.read(fs.readFileSync('./testimg2.jpg'));
+
+const {width, height} = img1;
+const diff = new PNG({width, height});
+
+pixelmatch(img1.data, img2.data, diff.data, width, height, {threshold: 0.1});
+
+fs.writeFileSync('diff.png', PNG.sync.write(diff));
+
 // let score = 0;
 // let k1 = 0
 // let k2 = 0
@@ -117,9 +129,9 @@ const img2 = fs.readFileSync("./testimg2.jpg");
 //   console.error('Error generating SSIM', err);
 // }
 
-const ssimIndex = ssim(img1, img2);
+// const ssimIndex = ssim(img1, img2);
 
-return ssimIndex;
+// return ssimIndex;
 
 // console.log(score)
 

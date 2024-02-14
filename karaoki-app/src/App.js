@@ -97,9 +97,7 @@ const getTester = async () => {
 
   return (
     <>
-    <div className='vibeCheck'>
-      <h1>VENNLIGST SNU ENHETEN DIN SÅNN AT DEN ER I PORTRETT MODUS!!!</h1>
-    </div>
+
     <div className="karaokeWrapper">
       <div className='songWrapper'>
         <div className='karaokeSongs'>
