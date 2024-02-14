@@ -10,6 +10,7 @@ const ImageSSIM = require('image-ssim');
 const app = express();
 const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
+const textTest = require('./content.json');
 
 app.use(cors());
 app.use(express.static('build'));
@@ -88,6 +89,11 @@ app.post('/tester', async (req, res) => {
     // releaseDbConnection(req, res);
   }
 });
+
+app.get('/getText', (req, res) => {
+  res.send(textTest);
+  console.log(textTest)
+})
 
 
 const port = process.env.PORT || 6969;

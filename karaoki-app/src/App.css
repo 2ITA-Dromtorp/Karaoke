@@ -26,6 +26,7 @@
   height: 180%;
   width: 100%;
   background-color: hotpink;;
+  flex-direction: column;
 }
 
 .karaokeSongs {
@@ -37,6 +38,7 @@
   width: 100%;
   /* padding-top: 3vh; */
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(238,155,176,1) 100%);
+  /* flex-direction: column; */
 }
 
 .karaokeCard {
@@ -48,6 +50,11 @@
   margin-bottom: 1vh;
   background-color: #222725;
 }
+
+.karaokeCard h1 {
+  color: white;
+}
+
 .karaokeCard img {
   width: 95%;
   padding: 1vh;
