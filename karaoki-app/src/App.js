@@ -1,7 +1,7 @@
 import Melvin from './images/placeholder_melvin.jpg';
 import './App.css';
 import Test from './components/test';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useNavigate } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
 import Scoreboard from './components/scoreboard'
@@ -164,7 +164,7 @@ useEffect(() => {
           </div> */}
 
           {songArray.length > 0 &&songArray.map((sang, index) => (
-              <SongCard sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
+              <SongCard name={sang.vareNavn} sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
           ))}
 
           </div>
