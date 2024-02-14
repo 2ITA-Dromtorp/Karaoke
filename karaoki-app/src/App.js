@@ -6,6 +6,7 @@ import WaveSurfer from 'wavesurfer.js';
 import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
 import Scoreboard from './components/scoreboard'
 import axios from 'axios';
+import SongCard from './SongCard';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   let wavesurfer = null;
   let [imgExport, setImgExport] = useState("");
   let [text, setText] = useState("");
+  const [songArray, setSongArray] = useState([]);
 
     console.log("FOAFIUAOFUAOFIU")
 
@@ -27,7 +29,7 @@ function App() {
           url: './audio/tested.mp3'
       });
 
-      wavesurfer.load('./audio/HURHRUHURHURHRU.mp3');
+      wavesurfer.load('./audio/heraldOfDarknessInstrumental.mp3');
       return () => {
           wavesurfer.destroy();
       };
@@ -102,42 +104,45 @@ const getText = async () => {
       console.log(response)
       // setText(response.data.frontTest.headerText)
       let vareArray = response.data;
-      console.log(vareArray.headerText)
-      for (let i = 0; i < vareArray.length; i++) {
-        const wrapperDiv = document.createElement("div");
-        wrapperDiv.classList.add("karaokeCard");
+      console.log(vareArray)
+      setSongArray(response.data);
+      console.log(songArray)
+
+      // for (let i = 0; i < vareArray.length; i++) {
+      //   const wrapperDiv = document.createElement("div");
+      //   wrapperDiv.classList.add("karaokeCard");
       
-        const h1Tag = document.createElement("h1");
-        const h1Text = document.createTextNode(vareArray[i].vareNavn);
-        h1Tag.appendChild(h1Text);
+      //   const h1Tag = document.createElement("h1");
+      //   const h1Text = document.createTextNode(vareArray[i].vareNavn);
+      //   h1Tag.appendChild(h1Text);
       
-        const pTag = document.createElement("p");
-        const pText = document.createTextNode(vareArray[i].lengde);
-        pTag.appendChild(pText);
+      //   // const pTag = document.createElement("p");
+      //   // const pText = document.createTextNode(vareArray[i].lengde);
+      //   // pTag.appendChild(pText);
       
-        const pTag2 = document.createElement("p");
-        const pText2 = document.createTextNode(vareArray[i].beskrivelse);
-        pTag2.appendChild(pText2);
+
       
-        const imgTag = document.createElement("img");
-        imgTag.src = vareArray[i].bilde
-        imgTag.classList.add("bilde")
+      //   const imgTag = document.createElement("img");
+      //   imgTag.src = vareArray[i].bilde
+      //   imgTag.classList.add("bilde")
       
-        wrapperDiv.appendChild(h1Tag);
-        wrapperDiv.appendChild(imgTag)
-        wrapperDiv.appendChild(pTag);
-        wrapperDiv.appendChild(pTag2)
+      //   wrapperDiv.appendChild(h1Tag);
+      //   wrapperDiv.appendChild(imgTag)
+      //   // wrapperDiv.appendChild(pTag);
+
       
-        const gridElementfromhtml = document.getElementById("karaokeSongs")
-        gridElementfromhtml.appendChild(wrapperDiv)
-        console.log("sang "+[i + 1]+" er lagt til")
-      }
+      //   const gridElementfromhtml = document.getElementById("karaokeSongs")
+      //   gridElementfromhtml.appendChild(wrapperDiv)
+      //   console.log("sang "+[i + 1]+" er lagt til")
+      // }
     })
     
     .catch(error => console.log(error));
 };
+useEffect(() => {
+  getText()
+}, [onloadstart])
 
-getText()
 
   return (
     <>
@@ -158,6 +163,10 @@ getText()
             <img src={Melvin} alt='bilde'/>
           </div> */}
 
+          {songArray.length > 0 &&songArray.map((sang, index) => (
+              <SongCard sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
+          ))}
+
           </div>
           <Test/>
           <p>Hello World</p>
@@ -168,8 +177,8 @@ getText()
         <div id='waveform'> </div>
         <button onClick={() => handleclick()}>Sende spektrogramm</button>  
         <button onClick={() => getTester()}>Sammenlikne spektrogrammene</button>  
-        <button onClick={() => getText()}>Hent tekst</button> 
-
+        <button onClick={() => getText()}>Hent tekst</button>
+        
         <p>{text}</p> 
         <h1>test</h1>
         <div id='gridElement'></div>

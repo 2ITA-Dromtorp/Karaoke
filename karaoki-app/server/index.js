@@ -20,16 +20,7 @@ app.use(express.json({ limit: '50mb' }));
 // app.use(express.urlencoded({ limit: '50mb' }));
 const testimg = './testimg.png';
 
-// app.use((req, res, next) => {
-//   let data = '';
-//   req.on('data', chunk => {
-//     data += chunk;
-//   });
-//   req.on('end', () => {
-//     console.log('Request payload size:', data.length);
-//     next();
-//   });
-// });
+
 
 
 console.log("aefipafpu")
@@ -94,6 +85,12 @@ app.get('/getText', (req, res) => {
   res.send(textTest);
   console.log(textTest)
 })
+
+app.get('/song', (req, res) => {
+  res.send(textTest);
+  console.log("aefipafpu");
+});
+
 
 
 const port = process.env.PORT || 6969;
