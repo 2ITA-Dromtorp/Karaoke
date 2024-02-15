@@ -2,25 +2,25 @@
     {
       "vareNavn": "Gravemaskinsangen",
       "lengde": "3 minutter",
-      "bilde": "./images/placeholder_melvin.jpg",
+      "bilde": "/images/placeholder_melvin.jpg",
       "beskrivelse": "Veldig kul"
     },
     {
       "vareNavn": "Never gonna give you up",
       "lengde": "3 minutter",
-      "bilde": "./images/placeholder_melvin.jpg",
+      "bilde": "/images/placeholder_melvin.jpg",
       "beskrivelse": "Veldig kul"
     },
         {
       "vareNavn": "Skibidi",
       "lengde": "3 minutter",
-      "bilde": "./images/placeholder_melvin.jpg",
+      "bilde": "/images/placeholder_melvin.jpg",
       "beskrivelse": "Veldig kul"
     },
         {
       "vareNavn": "Legg til kul ide her",
       "lengde": "3 minutter",
-      "bilde": "./images/placeholder_melvin.jpg",
+      "bilde": "/images/placeholder_melvin.jpg",
       "beskrivelse": "Veldig kul"
     }
     

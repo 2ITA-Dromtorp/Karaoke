@@ -1,10 +1,16 @@
+import { Link, useNavigate } from "react-router-dom"
 
-function navBar() {
+function NavBar() {
+
+    
     return (
-    <div className='karaokeHeader'>
+    <div on className='karaokeHeader'>
+    <Link to="/">
     <h1 style={{color: 'white'}}>Karaoke🎤</h1>
+    </Link>
     </div>
     )
+    
 }
 
-export default navBar
+export default NavBar
