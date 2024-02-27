@@ -3,25 +3,33 @@
       "vareNavn": "Gravemaskinsangen",
       "lengde": "3 minutter",
       "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul"
+      "beskrivelse": "Veldig kul",
+      "artist": "Doktor Twinkleton",
+      "songPath": "/music/gravemaskinsangen.mp3"
     },
     {
       "vareNavn": "Never gonna give you up",
       "lengde": "3 minutter",
       "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul"
+      "beskrivelse": "Veldig kul",
+      "artist": "Rick Astley",
+      "songPath": "/music/gravemaskinsangen.mp3"
     },
         {
       "vareNavn": "Skibidi",
       "lengde": "3 minutter",
       "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul"
+      "beskrivelse": "Veldig kul",
+      "artist": "Legg til senere",
+      "songPath": "/music/gravemaskinsangen.mp3"
     },
         {
       "vareNavn": "Legg til kul ide her",
       "lengde": "3 minutter",
       "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul"
+      "beskrivelse": "Veldig kul",
+      "artist": "TBD",
+      "songPath": "/music/gravemaskinsangen.mp3"
     }
     
 ]

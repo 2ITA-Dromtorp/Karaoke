@@ -80,25 +80,23 @@ app.get('/test', (req, res) => {
 const img1 = PNG.sync.read(fs.readFileSync('./testimg.jpg'));
 const img2 = PNG.sync.read(fs.readFileSync('./testimg2.jpg'));
 
-const {width, height} = img1;
-const diff = new PNG({width, height});
+//Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
-pixelmatch(img1.data, img2.data, diff.data, width, height, {threshold: 0.1});
+computeSSIM(img1, img2, (err, score) => {
+  if (err) {
+    console.error('Error computing SSIM:', err);
+    return;
+  }
 
-fs.writeFileSync('diff.png', PNG.sync.write(diff));
+  console.log('SSIM:', score);
 
-
-console.log("soffjsoh")
   const threshold = 0.9; //Hvor anderledes de er fra hverandre, Andreas
   if (score >= threshold) {
     console.log('Spectrograms are alike.');
-    res.send('Spectrograms are alike.');
   } else {
     console.log('Spectrograms are different.');
-    res.send('Spectrograms are different.');
   }
-  
-;
+});
 
 })
 
