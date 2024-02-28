@@ -7,15 +7,11 @@ function SongCard({sangNavn, lengde, index={index}, bilde, beskrivelse}, props) 
     const navigate = useNavigate()
 
     const name = sangNavn;
-    // console.log(name);
-
 
     return (
         <div onClick={handleNav} name={sangNavn} className="karaokeCard">
             <h1>{sangNavn}</h1>
             <img src={bilde}/>
-            
-            {/* <img src={song} alt="Melvin" className="bilde"/> */}
         </div>
     );
     function handleNav() {
