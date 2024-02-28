@@ -1,7 +1,7 @@
 .karaokeWrapper {
   width: 100vw;
   height: 200vh;
-  background-color: gray;
+  background-color: hotpink;
   display: flex;
   flex-direction: column;
 }
@@ -51,7 +51,7 @@
   /* padding-top: 3vh; */
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(238,155,176,1) 100%);
   /* flex-direction: column; */
-}
+} 
 
 .karaokeCard {
 

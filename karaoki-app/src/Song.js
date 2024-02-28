@@ -3,15 +3,13 @@ import { useParams } from "react-router-dom";
 import WaveSurfer from 'wavesurfer.js';
 import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
 import { useEffect } from "react";
-
-function Song() {
+ function Song() {
     const {songName} = useParams();
     console.log(songName)
     let test = 2
-    
 
-        const getLIZONGREN = () => {
-            axios
+        const getLIZONGREN = async() => {
+            await axios
             .get("/LIZHONGREN")
             .then(response => {
                 console.log(response)
@@ -62,6 +60,21 @@ function Song() {
         };
 
         getLIZONGREN()
+
+        function getLocalStream() {
+            navigator.mediaDevices
+              .getUserMedia({ video: false, audio: true })
+              .then((stream) => {
+                window.localStream = stream;
+                window.localAudio.srcObject = stream;
+                window.localAudio.autoplay = true;
+              })
+              .catch((err) => {
+                console.error(`you got an error: ${err}`);
+              });
+          }
+          
+          getLocalStream();
         useEffect(() => {
         let wavesurfer, record
         let scrollingWaveform = false
@@ -107,7 +120,7 @@ function Song() {
             textContent: 'Download recording',
             })
         })
-        pauseButton.style.display = 'none'
+
         recButton.textContent = 'Record'
         
         record.on('record-progress', (time) => {
@@ -127,17 +140,7 @@ function Song() {
         progress.textContent = formattedTime
         }
         
-        const pauseButton = document.querySelector('#pause')
-        pauseButton.onclick = () => {
-        if (record.isPaused()) {
-            record.resumeRecording()
-            pauseButton.textContent = 'Pause'
-            return
-        }
-        
-        record.pauseRecording()
-        pauseButton.textContent = 'Resume'
-        }
+
         
         const micSelect = document.querySelector('#mic-select')
         {
@@ -151,14 +154,13 @@ function Song() {
             })
         })
         }
-        // Record button
+        // Record button: finn ut hvor lyd waveform blir laget og gjør om til base64
         const recButton = document.querySelector('#record')
         
         recButton.onclick = () => {
         if (record.isRecording() || record.isPaused()) {
             record.stopRecording()
             recButton.textContent = 'Record'
-            pauseButton.style.display = 'none'
             return
         }
         
@@ -171,12 +173,12 @@ function Song() {
         record.startRecording({ deviceId }).then(() => {
             recButton.textContent = 'Stop'
             recButton.disabled = false
-            pauseButton.style.display = 'inline'
         })
         }
         document.querySelector('input[type="checkbox"]').onclick = (e) => {
         scrollingWaveform = e.target.checked
         createWaveSurfer()
+        
         }
         
         createWaveSurfer()
@@ -196,7 +198,7 @@ function Song() {
   </p>
 
   <button id="record">Record</button>
-  <button id="pause">Pause</button>
+
 
   <select id="mic-select">
     <option value="" hidden>Select mic</option>
@@ -206,7 +208,7 @@ function Song() {
 
   <div id="mic"></div>
 
-  <div id="recordings"></div>
+  <div id="recordings"></div> 
 
 
 </html>
