@@ -68,7 +68,7 @@ app.get('/LIZHONGREN', (req, res) => {
 
 
 
-const port = process.env.PORT || 6969;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
 
@@ -79,12 +79,21 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 
 //Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
-app.get('/test', async (req, res) => {
+app.post('/test', async (req, res) => {
   try {
+    const img = req.body.data;
+    console.log(img);
+    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
+    console.log(req.body.data)
+    if (req = true) {
+      console.log("lang")
+      
+    }
+    // res.send("Ja det funker");  
     const img1 = await Jimp.read("./testimg.jpg");
+    const img2 = await Jimp.read("./heraldOfDarknessVocals.jpg");
+    img1.resize(img2.bitmap.width, img2.bitmap.height); // Resize img1 to match img2 dimensions
     await img1.writeAsync("ferdig1.png"); // save
-
-    const img2 = await Jimp.read("./testimg2.jpg");
     await img2.writeAsync("ferdig2.png"); // save
 
     const img1Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig1.png'));
@@ -101,5 +110,6 @@ app.get('/test', async (req, res) => {
   } catch (error) {
     console.error('Error processing images:', error.message);
     res.status(500).send('Internal Server Error');
+    console.log(error)
   }
 });

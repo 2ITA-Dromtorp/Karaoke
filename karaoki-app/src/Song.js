@@ -2,18 +2,24 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import WaveSurfer from 'wavesurfer.js';
 import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
  function Song() {
     const {songName} = useParams();
     console.log(songName)
     let test = 2
 
-        const getLIZONGREN = async() => {
+    const [songArray, setSongArray] = useState([]);
+        
+
+        const GetLIZONGREN = async() => {
             await axios
             .get("/LIZHONGREN")
             .then(response => {
                 console.log(response)
                 let vareArray = response.data;
+
+
+
                 // console.log(vareArray.headerText)
                 for (let i = 0; i < vareArray.length; i++) {
                 if ( i == test) {
@@ -36,6 +42,8 @@ import { useEffect } from "react";
                 const pText = document.createTextNode(vareArray[i].lengde);
                 pTag.appendChild(pText);
                 pTag.classList.add("songLengthText")
+                setSongArray(songProfile.lengde)
+                console.log(songProfile.lengde)
                 
                 
         
@@ -55,25 +63,31 @@ import { useEffect } from "react";
                 console.log("sang "+[i + 1]+" er lagt til")
                 }
             }
+            
+
             })
             .catch(error => console.log(error));
-        };
+        // };
 
-        getLIZONGREN()
+        // GetLIZONGREN()
 
-        useEffect(() => {
+
+
         let wavesurfer, record
         let scrollingWaveform = false
+        // console.log(vareArray)
         
-        const createWaveSurfer = () => {
+        const createWaveSurfer = (vareArray) => {
         // Create an instance of WaveSurfer
+        
         if (wavesurfer) {
             wavesurfer.destroy()
         }
         wavesurfer = WaveSurfer.create({
             container: '#mic',
-            waveColor: 'rgb(200, 0, 200)',
-            progressColor: 'rgb(100, 0, 100)',
+            waveColor: '#FFFF00',
+            progressColor: 'orange',
+            sampleRate: 5000,
         })
         
         // Initialize the Record plugin
@@ -111,11 +125,15 @@ import { useEffect } from "react";
         
         record.on('record-progress', (time) => {
             updateProgress(time)
+            // if (time > 5000) {
+            //     record.stopRecording()
+            // }
+            // console.log(time)
         })
         }
         
         const progress = document.querySelector('#progress')
-        const updateProgress = (time) => {
+        const updateProgress = async(time, vareArray) => {
         // time will be in milliseconds, convert it to mm:ss format
         const formattedTime = [
             Math.floor((time % 3600000) / 60000), // minutes
@@ -124,21 +142,45 @@ import { useEffect } from "react";
             .map((v) => (v < 10 ? '0' + v : v))
             .join(':')
         progress.textContent = formattedTime
+        console.log(songArray)
+        console.log(formattedTime)
+        if (formattedTime == songArray) {
+            record.stopRecording()
+            console.log(vareArray)
+
+                const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
+                console.log(imgExport);
+              
+                let dataToSend = imgExport[0]
+            
+                    console.log(dataToSend)
+                    axios.post("/test", {"data": dataToSend})
+                    .then(async (res) => {
+            
+                      console.log(res.data);
+            
+                    })
+                    .catch(error => {
+                      console.error('Error sending the POST request:', error);
+                    });
+                
         }
-        
+        }
+
+
 
         
         const micSelect = document.querySelector('#mic-select')
         {
-        // Mic selection
-        RecordPlugin.getAvailableAudioDevices().then((devices) => {
+          // Mic selection
+          RecordPlugin.getAvailableAudioDevices().then((devices) => {
             devices.forEach((device) => {
-            const option = document.createElement('option')
-            option.value = device.deviceId
-            option.text = device.label || device.deviceId
-            micSelect.appendChild(option)
+              const option = document.createElement('option')
+              option.value = device.deviceId
+              option.text = device.label || device.deviceId
+              micSelect.appendChild(option)
             })
-        })
+          })
         }
         // Record button: finn ut hvor lyd waveform blir laget og gjør om til base64
         const recButton = document.querySelector('#record')
@@ -167,9 +209,17 @@ import { useEffect } from "react";
         
         }
         
+        
         createWaveSurfer()
+        
+    }
 
-        }, []);
+
+
+    useEffect(() => {
+        GetLIZONGREN()
+    })
+
 
     return (
 
@@ -195,7 +245,7 @@ import { useEffect } from "react";
   <div id="mic"></div>
 
   <div id="recordings"></div> 
-
+    {/* <button onclick={updateTimes()}></button> */}
 
 </html>
 
