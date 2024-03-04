@@ -1,9 +1,13 @@
-# Karaoke hallo
-# Fortnite
-# PUBG
-wadawd
-awdwa
-dwa
-wadwad
-dwad
-wdwaddwadwadwa
+# Karaoke App
+
+## Innhold:
+
+
+* Innstallasjon
+* Wavesurfer
+
+### Innstallasjon
+Lag ett nytt react prosjekt:
+```shell
+npx create-react-app my-app
+```
