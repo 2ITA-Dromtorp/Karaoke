@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
   console.log("aefipafpu")
 });
 
-app.post('/tester', async (req, res) => {
+app.post('/creator', async (req, res) => {
   console.log("running")
 
   try {
@@ -56,15 +56,9 @@ app.get('/getText', (req, res) => {
   console.log(textTest)
 })
 
-app.get('/song', (req, res) => {
-  res.send(textTest);
-  console.log("aefipafpu");
-});
 
-app.get('/LIZHONGREN', (req, res) => {
-  res.send(textTest);
-  console.log("aefipafpu");
-});
+
+
 
 
 
@@ -74,10 +68,6 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 
 
 
-// KODEN UNDER DENNE KOMMENTAREN FUNKER IKKE!
-// LA KODEN VÆRE KOMMENTERT UT!
-
-//Bare at istedenfior å reade png-er tar du heller å comparer spektrogrammene laget av wavesurfer.js
 
 app.post('/test', async (req, res) => {
   try {
@@ -85,11 +75,6 @@ app.post('/test', async (req, res) => {
     console.log(img);
     fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
     console.log(req.body.data)
-    if (req = true) {
-      console.log("lang")
-      
-    }
-    // res.send("Ja det funker");  
     const img1 = await Jimp.read("./testimg.jpg");
     const img2 = await Jimp.read("./heraldOfDarknessVocals.jpg");
     img1.resize(img2.bitmap.width, img2.bitmap.height); // Resize img1 to match img2 dimensions

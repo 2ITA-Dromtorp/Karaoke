@@ -11,14 +11,7 @@ function HomePage() {
     const [songArray, setSongArray] = useState([]);
     let [text, setText] = useState("");
 
-  const getTester = async () => {
-    await axios
-      .get("/test")
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => console.log(error));
-  };
+
   
   const getText = async () => {
     await axios
@@ -45,12 +38,6 @@ function HomePage() {
                 <SongCard name={sang.vareNavn} sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
             ))}
           </div> 
-          <div>
-            <button onClick={() => getTester()}>Sammenlikne spektrogrammene</button>  
-            <button onClick={() => getText()}>Hent tekst</button>
-            <p>{text}</p> 
-            <div id='gridElement'></div>
-          </div>
         </div>
       </div>
     );
