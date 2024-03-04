@@ -125,10 +125,7 @@ import { useEffect, useState} from "react";
         
         record.on('record-progress', (time) => {
             updateProgress(time)
-            // if (time > 5000) {
-            //     record.stopRecording()
-            // }
-            // console.log(time)
+
         })
         }
         
