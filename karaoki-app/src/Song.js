@@ -13,7 +13,7 @@ import { useEffect, useState} from "react";
 
         const getText = async() => {
             await axios
-            .get("mulighet.no:8080/getText")
+            .get("/getText")
             .then(response => {
                 console.log(response)
                 let vareArray = response.data;
@@ -148,7 +148,7 @@ import { useEffect, useState} from "react";
               
                 let dataToSend = imgExport[0]
             
-                    axios.post("mulighet.no:8080/test", {"data": dataToSend})
+                    axios.post("/test", {"data": dataToSend})
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });

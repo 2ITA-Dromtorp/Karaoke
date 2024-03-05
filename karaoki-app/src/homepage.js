@@ -15,7 +15,7 @@ function HomePage() {
   
   const getText = async () => {
     await axios
-      .get("mulighet.no:8080/getText")
+      .get("/getText")
       .then(response => {
         console.log(response)
         let vareArray = response.data;
