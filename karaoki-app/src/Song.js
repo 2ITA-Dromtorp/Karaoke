@@ -11,9 +11,9 @@ import { useEffect, useState} from "react";
     const [songArray, setSongArray] = useState([]);
         
 
-        const GetLIZONGREN = async() => {
+        const getText = async() => {
             await axios
-            .get("/LIZHONGREN")
+            .get("mulighet.no:8080/getText")
             .then(response => {
                 console.log(response)
                 let vareArray = response.data;
@@ -69,7 +69,7 @@ import { useEffect, useState} from "react";
             .catch(error => console.log(error));
         // };
 
-        // GetLIZONGREN()
+
 
 
 
@@ -125,10 +125,7 @@ import { useEffect, useState} from "react";
         
         record.on('record-progress', (time) => {
             updateProgress(time)
-            // if (time > 5000) {
-            //     record.stopRecording()
-            // }
-            // console.log(time)
+
         })
         }
         
@@ -146,20 +143,12 @@ import { useEffect, useState} from "react";
         console.log(formattedTime)
         if (formattedTime == songArray) {
             record.stopRecording()
-            console.log(vareArray)
 
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
-                console.log(imgExport);
               
                 let dataToSend = imgExport[0]
             
-                    console.log(dataToSend)
-                    axios.post("mulighet.no:8081/test", {"data": dataToSend})
-                    .then(async (res) => {
-            
-                      console.log(res.data);
-            
-                    })
+                    axios.post("mulighet.no:8080/test", {"data": dataToSend})
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });
@@ -217,7 +206,7 @@ import { useEffect, useState} from "react";
 
 
     useEffect(() => {
-        GetLIZONGREN()
+        getText()
     })
 
 

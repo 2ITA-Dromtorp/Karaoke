@@ -32,7 +32,7 @@ function Mp3Creator() {
     let dataToSend = imgExport[0]
 
         console.log(dataToSend)
-        axios.post("/tester", {"data": dataToSend})
+        axios.post("mulighet.no:8080/creator", {"data": dataToSend})
         .then(async (res) => {
 
           console.log(res.data);
