@@ -22,7 +22,7 @@ const proxy = require('http-proxy-middleware');
  
 module.exports = function (app) {
     app.use(proxy('/', {
-target: 'http://mulighet.no:8082',
+target: 'http://mulighet.no:8080',
         logLevel: 'debug',
         changeOrigin: true
     }));
