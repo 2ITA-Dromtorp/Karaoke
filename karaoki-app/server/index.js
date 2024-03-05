@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); 
+const cors = require('cors')({origin: true}); 
 const fs = require('fs');
 const { computeSSIM, compare, score } = require('image-ssim');
 const { ssim, loadImage } = require('ssim.js');
@@ -18,8 +18,15 @@ const Jimp = require("jimp");
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json({ limit: '50mb' }));
-const testimg = './testimg.png';
-
+const proxy = require('http-proxy-middleware');
+ 
+module.exports = function (app) {
+    app.use(proxy('/', {
+target: 'http://mulighet.no:8082',
+        logLevel: 'debug',
+        changeOrigin: true
+    }));
+};
 
 
 
@@ -113,3 +120,5 @@ app.post('/test', async (req, res) => {
     console.log(error)
   }
 });
+
+

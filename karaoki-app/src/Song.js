@@ -154,7 +154,7 @@ import { useEffect, useState} from "react";
                 let dataToSend = imgExport[0]
             
                     console.log(dataToSend)
-                    axios.post("/test", {"data": dataToSend})
+                    axios.post("mulighet.no:8081/test", {"data": dataToSend})
                     .then(async (res) => {
             
                       console.log(res.data);

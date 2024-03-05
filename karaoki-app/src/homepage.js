@@ -13,7 +13,7 @@ function HomePage() {
 
   const getTester = async () => {
     await axios
-      .get("/test")
+      .get("mulighet.no:8081/api/test")
       .then(response => {
         console.log(response)
       })

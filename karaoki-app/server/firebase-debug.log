@@ -1,0 +1,33 @@
+[debug] [2024-03-04T10:17:51.166Z] ----------------------------------------------------------------------
+[debug] [2024-03-04T10:17:51.172Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\chena\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-04T10:17:51.173Z] CLI Version:   13.2.0
+[debug] [2024-03-04T10:17:51.173Z] Platform:      win32
+[debug] [2024-03-04T10:17:51.173Z] Node Version:  v20.1.0
+[debug] [2024-03-04T10:17:51.174Z] Time:          Mon Mar 04 2024 11:17:51 GMT+0100 (Central European Standard Time)
+[debug] [2024-03-04T10:17:51.174Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-04T10:17:51.181Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-03-04T10:17:51.397Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-04T10:17:51.398Z] > authorizing via signed-in user (chen.alexander.fuglestad@gmail.com)
+[debug] [2024-03-04T10:17:51.398Z] [iam] checking project karaoki-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-04T10:17:51.400Z] > refreshing access token with scopes: []
+[debug] [2024-03-04T10:17:51.401Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-03-04T10:17:51.402Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-04T10:17:51.560Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-03-04T10:17:51.560Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-04T10:17:51.579Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/karaoki-app:testIamPermissions [none]
+[debug] [2024-03-04T10:17:51.579Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/karaoki-app:testIamPermissions x-goog-quota-user=projects/karaoki-app
+[debug] [2024-03-04T10:17:51.580Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/karaoki-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-04T10:17:51.733Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-03-04T10:17:51.733Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-03-04T10:17:52.412Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/karaoki-app:testIamPermissions 200
+[debug] [2024-03-04T10:17:52.413Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/karaoki-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-04T10:17:52.414Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/karaoki-app [none]
+[debug] [2024-03-04T10:17:52.757Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/karaoki-app 200
+[debug] [2024-03-04T10:17:52.757Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/karaoki-app {"projectId":"karaoki-app","projectNumber":"683861770753","displayName":"Karaoki-app","name":"projects/karaoki-app","resources":{"hostingSite":"karaoki-app"},"state":"ACTIVE","etag":"1_671adf2a-32c1-46fe-b222-cf2ff49e3e3a"}
+[info] 
+[info] === Deploying to 'karaoki-app'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-03-04T10:17:52.771Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/karaoki-app/versions [none]
+[debug] [2024-03-04T10:17:52.771Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/karaoki-app/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
