@@ -1,9 +1,5 @@
-import Melvin from './images/placeholder_melvin.jpg';
 import './App.css';
-import Test from './components/test';
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Scoreboard from './components/scoreboard'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SongCard from './SongCard';
 

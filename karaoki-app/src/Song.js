@@ -9,7 +9,8 @@ import { useEffect, useState} from "react";
     let test = 2
 
     // const [songArray, setSongArray] = useState("");
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState({});
+    const [imgClass, setImgClass] = useState("bilde");
 
         const getText = async() => {
             await axios
@@ -17,32 +18,21 @@ import { useEffect, useState} from "react";
             .then(response => {
                 console.log(response)
                 let vareArray = response.data;
-
-
-
                 // console.log(vareArray.headerText)
-                for (let i = 0; i < vareArray.length; i++) {
-                if ( i == test) {
                     // const songProfile = vareArray.find((song) => song.vareNavn === songName);
                     setContent(vareArray.find((song) => song.vareNavn === songName));
-                    // console.log(songProfile)
-                    // setContent(songProfile)
-
-                    // console.log(songArray)
-
-
-                }
                 
-            }
                               // console.log(content.lengde)
 
             })
             .catch(error => console.log(error));
-        // };
+        };
 
 
 
-
+        useEffect(() => {
+          console.log(content.lengde)
+        if(!content.lengde) return;
 
         let wavesurfer, record
         let scrollingWaveform = false
@@ -66,7 +56,7 @@ import { useEffect, useState} from "react";
         record.on('record-end', (blob) => {
             const container = document.querySelector('#recordings')
             const recordedUrl = URL.createObjectURL(blob)
-        
+            setImgClass("bilde")
             // Create wavesurfer from the recorded audio
             const wavesurfer = WaveSurfer.create({
             container,
@@ -93,13 +83,13 @@ import { useEffect, useState} from "react";
 
         recButton.textContent = 'Record'
         
-        record.on('record-progress', (time, content) => {
-            updateProgress(time, content)
+        record.on('record-progress', (time) => {
+            updateProgress(time)
         })
         }
         
         const progress = document.querySelector('#progress')
-        const updateProgress = async(time, content) => {
+        const updateProgress = async(time) => {
         // time will be in milliseconds, convert it to mm:ss format
         const formattedTime = [
             Math.floor((time % 3600000) / 60000), // minutes
@@ -111,7 +101,7 @@ import { useEffect, useState} from "react";
         progress.textContent = formattedTime
         console.log(formattedTime)
         console.log(content)
-        if (formattedTime == 1) {
+        if (formattedTime == content.lengde) {
             record.stopRecording()
 
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
@@ -122,7 +112,6 @@ import { useEffect, useState} from "react";
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });
-                
         }
         }
 
@@ -160,6 +149,7 @@ import { useEffect, useState} from "react";
         record.startRecording({ deviceId }).then(() => {
             recButton.textContent = 'Stop'
             recButton.disabled = false
+            setImgClass("bilde spinningimg")
         })
         }
         document.querySelector('input[type="checkbox"]').onclick = (e) => {
@@ -168,51 +158,47 @@ import { useEffect, useState} from "react";
         
         }
         
-        
         createWaveSurfer()
         
-    }
-
-
+    },[content])
 
     useEffect(() => {
         getText()
     }, [onloadstart])
 
 
-    return (
+    return (<div className="karaokeWrapper">
       <div className="karaokeSong" id="karaokeSong">
       {/* <div id="songDiv"></div> */}
+        
+         <img src={content.bilde} className={imgClass}/>
+         <h1>{content.vareNavn}</h1>
+        
+        <h2 className="songSubHeader">{content.artist}</h2>
+        <p className="pText">{content.lengde}</p>
 
-<html>
-<h1>Press Record to start recording 🎙️</h1>
+        <button id="record" className="record">Record</button>
 
-<p>
-📖 <a href="https://wavesurfer.xyz/docs/classes/plugins_record.RecordPlugin">Record plugin docs</a>
-</p>
-<img src={content.bilde} className="bilde"/>
-<h1>{content.vareNavn}</h1>
-<h2 className="songSubHeader">{content.artist}</h2>
-<p className="pText">{content.lengde}</p>
+        <select id="mic-select" className="mic">
+            <option value="" hidden>Select mic</option>
+            </select>
+        <label><input type="checkbox"  /> Scrolling waveform</label>
+        
+        <p id="progress">00:00</p>
+        
+        <p className="sangTekst">{content.sangTekst}</p>
 
-<button id="record">Record</button>
 
-<select id="mic-select">
-<option value="" hidden>Select mic</option>
-</select>
-<label><input type="checkbox"  /> Scrolling waveform</label>
-<p id="progress">00:00</p>
+        <div id="mic" className="micey"></div>
 
-<div id="mic"></div>
+        <div id="recordings" className="recordingsey"></div> 
+    {/* <button onclick={updateTimes()}></button> */}
 
-<div id="recordings"></div> 
-{/* <button onclick={updateTimes()}></button> */}
 
-</html>
 
 
       </div>
-
+</div>
 
 
     

@@ -1,14 +1,11 @@
 import WaveSurfer from 'wavesurfer.js';
-import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Mp3Creator() {
     const waveref = useRef(null);
     let wavesurfer = null;
-    let [imgExport, setImgExport] = useState("");
-    let [text, setText] = useState("");
-    const [songArray, setSongArray] = useState([]);
+
   
     useEffect(() => {
         wavesurfer = WaveSurfer.create({
