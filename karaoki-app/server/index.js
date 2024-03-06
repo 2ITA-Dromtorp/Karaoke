@@ -7,6 +7,7 @@ const PNG = require('pngjs').PNG;
 const textTest = require('./content.json');
 const path = require('path');
 const Jimp = require("jimp");
+const { text } = require('body-parser');
 
 
 app.use(cors());
@@ -26,7 +27,7 @@ app.post('/creator', async (req, res) => {
 
   try {
     const img = req.body.data;
-    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
+    fs.writeFileSync("adminExport.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
     if (req = true) {
       
     }
@@ -55,9 +56,11 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 app.post('/ssim', async (req, res) => {
   try {
     const img = req.body.data;
+    const songId = req.body.id
+    console.log(songId)
     fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
     const img1 = await Jimp.read("./testimg.jpg");
-    const img2 = await Jimp.read("./heraldOfDarknessVocals.jpg");
+    const img2 = await Jimp.read(textTest[songId].vokalPath);
     img1.resize(img2.bitmap.width, img2.bitmap.height); // Resize img1 to match img2 dimensions
     await img1.writeAsync("ferdig1.png"); // save
     await img2.writeAsync("ferdig2.png"); // save
@@ -73,6 +76,7 @@ app.post('/ssim', async (req, res) => {
 
   } catch (error) {
     res.status(500).send('Internal Server Error');
+    console.log(error)
   }
 });
 

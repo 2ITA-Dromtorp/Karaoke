@@ -16,7 +16,7 @@ function Mp3Creator() {
             url: './audio/tested.mp3'
         });
   
-        wavesurfer.load('./audio/heraldOfDarknessInstrumental.mp3');
+        wavesurfer.load('./audio/neverGonnaGiveYouUpVocals.mp3');
         return () => {
             wavesurfer.destroy();
         };

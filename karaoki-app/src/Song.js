@@ -8,9 +8,11 @@ import { useEffect, useState} from "react";
     console.log(songName)
     let test = 2
 
+
     // const [songArray, setSongArray] = useState("");
     const [content, setContent] = useState({});
     const [imgClass, setImgClass] = useState("bilde");
+    const [testVerdi, setTestVerdi] = useState(0);
 
         const getText = async() => {
             await axios
@@ -21,7 +23,6 @@ import { useEffect, useState} from "react";
                 // console.log(vareArray.headerText)
                     // const songProfile = vareArray.find((song) => song.vareNavn === songName);
                     setContent(vareArray.find((song) => song.vareNavn === songName));
-                
                               // console.log(content.lengde)
 
             })
@@ -45,9 +46,9 @@ import { useEffect, useState} from "react";
         }
         wavesurfer = WaveSurfer.create({
             container: '#mic',
-            waveColor: '#FFFF00',
+            waveColor: 'white',
             progressColor: 'orange',
-            sampleRate: 5000,
+            sampleRate: 20000
         })
         
         // Initialize the Record plugin
@@ -60,10 +61,12 @@ import { useEffect, useState} from "react";
             // Create wavesurfer from the recorded audio
             const wavesurfer = WaveSurfer.create({
             container,
-            waveColor: 'rgb(200, 100, 0)',
+            waveColor: '#4F4A85',
             progressColor: 'rgb(100, 50, 0)',
             url: recordedUrl,
+            sampleRate: 20000
             })
+            
         
             // Play button
             const button = container.appendChild(document.createElement('button'))
@@ -79,6 +82,7 @@ import { useEffect, useState} from "react";
             download: 'recording.' + blob.type.split(';')[0].split('/')[1] || 'webm',
             textContent: 'Download recording',
             })
+            
         })
 
         recButton.textContent = 'Record'
@@ -100,15 +104,13 @@ import { useEffect, useState} from "react";
 
         progress.textContent = formattedTime
         console.log(formattedTime)
-        console.log(content)
+        console.log(content.lengde)
         if (formattedTime == content.lengde) {
             record.stopRecording()
-
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
-              
                 let dataToSend = imgExport[0]
             
-                    axios.post("/ssim", {"data": dataToSend})
+                    axios.post("/ssim", {"data": dataToSend, "id":content.id})
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });
@@ -134,6 +136,8 @@ import { useEffect, useState} from "react";
         const recButton = document.querySelector('#record')
         
         recButton.onclick = () => {
+          var audio = new Audio(content.songPath);
+          audio.play();
         if (record.isRecording() || record.isPaused()) {
             record.stopRecording()
             recButton.textContent = 'Record'
