@@ -24,5 +24,8 @@
     "pngjs": "^7.0.0",
     "sharp": "^0.33.2",
     "ssim.js": "^3.5.0"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }

@@ -12,8 +12,15 @@ const Jimp = require("jimp");
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json({ limit: '50mb' }));
-const testimg = './testimg.png';
-
+// const proxy = require('http-proxy-middleware');
+ 
+// module.exports = function (app) {
+//     app.use(proxy('/', {
+// target: 'http://mulighet.no:8080',
+//         logLevel: 'debug',
+//         changeOrigin: true
+//     }));
+// };
 
 app.post('/creator', async (req, res) => {
 
@@ -68,3 +75,5 @@ app.post('/ssim', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
