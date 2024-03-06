@@ -89,6 +89,23 @@
   margin-top: 10vh;
 }
 
+.record {
+  width: 100%;
+  height: 6vh;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.mic {
+  width: 100%;
+  border-radius: 10px;
+  height: 3vh;
+}
+
+.record:active {
+  background-color: red;
+}
+
 @media screen and (orientation: landscape) {
   * {
     overflow: hidden;

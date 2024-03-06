@@ -8,8 +8,8 @@ import { useEffect, useState} from "react";
     console.log(songName)
     let test = 2
 
-    const [songArray, setSongArray] = useState([]);
-        
+    // const [songArray, setSongArray] = useState("");
+    const [content, setContent] = useState([]);
 
         const getText = async() => {
             await axios
@@ -23,47 +23,18 @@ import { useEffect, useState} from "react";
                 // console.log(vareArray.headerText)
                 for (let i = 0; i < vareArray.length; i++) {
                 if ( i == test) {
-                    const songProfile = vareArray.find((song) => song.vareNavn === songName);
-                    console.log(songProfile)
-                const wrapperDiv = document.createElement("div");
-                wrapperDiv.classList.add("songBox");
-                
-                const h1Tag = document.createElement("h1");
-                const h1Text = document.createTextNode(songProfile.vareNavn);
-                h1Tag.appendChild(h1Text);
-                h1Tag.classList.add("songHeader")
+                    // const songProfile = vareArray.find((song) => song.vareNavn === songName);
+                    setContent(vareArray.find((song) => song.vareNavn === songName));
+                    // console.log(songProfile)
+                    // setContent(songProfile)
 
-                const h2Tag = document.createElement("h2");
-                const h2Text = document.createTextNode(songProfile.artist);
-                h2Tag.appendChild(h2Text);
-                h2Tag.classList.add("songSubHeader")
-                
-                const pTag = document.createElement("p");
-                const pText = document.createTextNode(vareArray[i].lengde);
-                pTag.appendChild(pText);
-                pTag.classList.add("songLengthText")
-                setSongArray(songProfile.lengde)
-                console.log(songProfile.lengde)
-                
-                
-        
-                
-                const imgTag = document.createElement("img");
-                imgTag.src = songProfile.bilde
-                imgTag.classList.add("bilde")
-                
-                wrapperDiv.appendChild(imgTag)
-                wrapperDiv.appendChild(h1Tag);
-                wrapperDiv.appendChild(h2Tag);
-                wrapperDiv.appendChild(pTag);
-        
-                
-                const gridElementfromhtml = document.getElementById("karaokeSong")
-                gridElementfromhtml.appendChild(wrapperDiv)
-                console.log("sang "+[i + 1]+" er lagt til")
+                    // console.log(songArray)
+
+
                 }
+                
             }
-            
+                              // console.log(content.lengde)
 
             })
             .catch(error => console.log(error));
@@ -77,9 +48,8 @@ import { useEffect, useState} from "react";
         let scrollingWaveform = false
         // console.log(vareArray)
         
-        const createWaveSurfer = (vareArray) => {
+        const createWaveSurfer = (content, songProfile, vareArray) => {
         // Create an instance of WaveSurfer
-        
         if (wavesurfer) {
             wavesurfer.destroy()
         }
@@ -123,14 +93,13 @@ import { useEffect, useState} from "react";
 
         recButton.textContent = 'Record'
         
-        record.on('record-progress', (time) => {
-            updateProgress(time)
-
+        record.on('record-progress', (time, content) => {
+            updateProgress(time, content)
         })
         }
         
         const progress = document.querySelector('#progress')
-        const updateProgress = async(time, vareArray) => {
+        const updateProgress = async(time, content) => {
         // time will be in milliseconds, convert it to mm:ss format
         const formattedTime = [
             Math.floor((time % 3600000) / 60000), // minutes
@@ -138,17 +107,18 @@ import { useEffect, useState} from "react";
         ]
             .map((v) => (v < 10 ? '0' + v : v))
             .join(':')
+
         progress.textContent = formattedTime
-        console.log(songArray)
         console.log(formattedTime)
-        if (formattedTime == songArray) {
+        console.log(content)
+        if (formattedTime == 1) {
             record.stopRecording()
 
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
               
                 let dataToSend = imgExport[0]
             
-                    axios.post("/test", {"data": dataToSend})
+                    axios.post("/ssim", {"data": dataToSend})
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });
@@ -207,43 +177,50 @@ import { useEffect, useState} from "react";
 
     useEffect(() => {
         getText()
-    })
+    }, [onloadstart])
 
 
     return (
-
-            <div className="karaokeSong" id="karaokeSong">
-            {/* <div id="songDiv"></div> */}
+      <div className="karaokeSong" id="karaokeSong">
+      {/* <div id="songDiv"></div> */}
 
 <html>
-  <h1>Press Record to start recording 🎙️</h1>
+<h1>Press Record to start recording 🎙️</h1>
 
-  <p>
-    📖 <a href="https://wavesurfer.xyz/docs/classes/plugins_record.RecordPlugin">Record plugin docs</a>
-  </p>
+<p>
+📖 <a href="https://wavesurfer.xyz/docs/classes/plugins_record.RecordPlugin">Record plugin docs</a>
+</p>
+<img src={content.bilde} className="bilde"/>
+<h1>{content.vareNavn}</h1>
+<h2 className="songSubHeader">{content.artist}</h2>
+<p className="pText">{content.lengde}</p>
 
-  <button id="record">Record</button>
+<button id="record">Record</button>
 
+<select id="mic-select">
+<option value="" hidden>Select mic</option>
+</select>
+<label><input type="checkbox"  /> Scrolling waveform</label>
+<p id="progress">00:00</p>
 
-  <select id="mic-select">
-    <option value="" hidden>Select mic</option>
-  </select>
-  <label><input type="checkbox"  /> Scrolling waveform</label>
-  <p id="progress">00:00</p>
+<div id="mic"></div>
 
-  <div id="mic"></div>
-
-  <div id="recordings"></div> 
-    {/* <button onclick={updateTimes()}></button> */}
+<div id="recordings"></div> 
+{/* <button onclick={updateTimes()}></button> */}
 
 </html>
 
 
-            </div>
+      </div>
+
+
+
+    
 
     );
 
 
 }
+
 
 export default Song;

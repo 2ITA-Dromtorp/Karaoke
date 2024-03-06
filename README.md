@@ -1,72 +1,24 @@
-# Karaoke App
+# Karaoke App - technical documention
  
-## Innhold:
+## Content:
  
  
-* Innstallasjon
-* Wavesurfer
-* Homepage.js
- 
-### Innstallasjon
-Lag ett nytt react prosjekt:
-```shell
-npx create-react-app my-app
-```
-Innstaler React-router-dom i react prosjektet:
-```shell
-npm i react-router-dom
-```
-Innstaler Node i react prosjektet:
-```shell
-npm i -g n
-```
-Innstaler Axios i react prosjektet:
-```shell
-npm install axios
-```
-Innstaller Assert i react prosjektet:
-```shell
-npm install assert
-```
-Innstaller Cors i react prosjektet:
-```shell
-npm install cors
-```
-Innstaller Express i react prosjektet:
-```shell
-npm install express
-```
-Innstaller Ssim i react prosjektet:
-```shell
-npm install --save img-ssim
-```
-Innstaller Jimp i react prosjektet:
-```shell
-npm install --save jimp
-```
-Innstaller Pixelmatch i react prosjektet:
-```shell
-npm install pixelmatch
-```
-Innstaller Pngjs i react prosjektet:
-```shell
-npm install pngjs --save
-```
-Innstaller Sharp i react prosjektet:
-```shell
-npm install sharp
-```
-Innstaller Ssim.js i react prosjektet:
-```shell
-npm install ssim.js
-```
+* [Install](#install)
+* [Wavesurfer](#wavesurfer)
+* [Index.js](#index-js)
 
 
+ ***
+### Install
+Download dependencies:
+```shell
+npm i
+```
 
-
+***
 ### Wavesurfer
 
-Wavesurfer konfigurasjon:
+Wavesurfer configuration:
 
 ```js
 import WaveSurfer from 'wavesurfer.js';
@@ -79,11 +31,11 @@ import WaveSurfer from 'wavesurfer.js';
     sampleRate: 5000,
 })
 ```
-   * **wavesurfer** = WaveSurfer.create({}) gir variabelen wavesurfer da en waveform som verdi. Denne endres på med parameterne du ser ovenfor.
-   * **container** sier bare hvor waveformen skal gå
-   * **waveColor** angir du fargen waveformen skal ha, i enten rgb eller hex.
-   * **progressColor** angir du fargen waveformen skal ha, til venstre for der den er i lydfilen. 
-   * **sampleRate** er kvaliteten på opptaket. Ut ifra det jeg har testet har det veldig lite å si hvor høy/lav den er.
+   * **wavesurfer** = WaveSurfer.create({}) gives the variable wavesurfer a waveform value. This changes according to the paramethers set in the function above.
+   * **container** is telling where the waveform is supposed to go
+   * **waveColor** decides which color the waveform gets (rgb or hex)
+   * **progressColor** decides the color you want the waveform to have, according to your progress through the waveform. Think of it as a progressbar like on YouTube.
+   * **sampleRate** the difference between high or low value of the sampleRate doesn't give much effect from what I've tested.
 
 ```js
            const updateProgress = async(time, vareArray) => {
@@ -112,73 +64,68 @@ import WaveSurfer from 'wavesurfer.js';
         }
 ```
 
-
-### Homepage.js
-#### Innhold på siden:
-```js
-import './App.css';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import SongCard from './SongCard';
-```
 ***
-#### Funksjon - Lag en funksjon som heter **Homepage** inne i Homepage.js
+### Index js
+#### Dependencies in index.js
+* [express](https://www.npmjs.com/package/express)
+* [cors](https://www.npmjs.com/package/cors) 
+* [fs](https://nodejs.org/api/fs.html) 
+* [ssim](https://www.npmjs.com/package/ssim.js/v/3.4.0)
+* [pngjs](https://www.npmjs.com/package/pngjs)
+* [path](https://nodejs.org/docs/latest/api/path.html)
+* [jimp](https://www.npmjs.com/package/jimp)
+*** 
+#### Covert **base64** to jpg
 ```js
- const [songArray, setSongArray] = useState([]);
-    let [text, setText] = useState("");
+app.post('/creator', async (req, res) => {
 
-    /*Variabler*/
-
-  useEffect(() => {
-    getText()
-  }, [onloadstart])
-
-      return (
-      <div className="karaokeWrapper">
-        <div className='songWrapper'>
-          <div className='karaokeSongs' id='karaokeSongs'>  
-            {songArray.length > 0 &&songArray.map((sang, index) => (
-                <SongCard name={sang.vareNavn} sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
-            ))}
-          </div> 
-          <div>
-            <button onClick={() => getTester()}>Sammenlikne spektrogrammene</button>  
-            <button onClick={() => getText()}>Hent tekst</button>
-            <p>{text}</p> 
-            <div id='gridElement'></div>
-          </div>
-        </div>
-      </div>
-    );
-
-
-export default HomePage;
-
-```
-* **SongCard** blir renderet gjennom 
-```js
-{songArray.length > 0 &&songArray.map((sang, index) => (/*...*/) ) }
-```
-* Dette betyr at for hvert element i **songArray** blir **SpngCard** renderet med de tilsvarende egenskaper sendt som attributter.
-***
-#### Variabler 
-```js
-
-  const getText = async () => {
-    await axios
-      .get("/getText")
-      .then(response => {
-        console.log(response)
-        let vareArray = response.data;
-        console.log(vareArray)
-        setSongArray(response.data);
-        console.log(songArray)
-      })
+  try {
+    const img = req.body.data;
+    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
+    if (req = true) {
       
-      .catch(error => console.log(error));
-  };
+    }
+    const b = req;
+    res.send("Ja det funker");
+  } catch (err) {
+    res.status(500).send('Internal Server Error');
+  } finally {
+  }
+});
+```
+***
+#### Sends data from content.json to frontend
+```js
+app.get('/getText', (req, res) => {
+  res.send(textTest);
+})
+```
+***
+#### Converts jpg to png and compares the similarity between the new picture and the original using the **ssim** method
 
-``` 
-1. Lag variabelen **getText**
-* På samme måte som **getTester** er **getText** en async funksjon lager en **get**-request til **/getText**. 
-* Så gir den **vareArray** verdien av responsen og i **.catch()** så vil den fortelle at det er en error er hvis det er en error. 
+```js
+app.post('/ssim', async (req, res) => {
+  try {
+    const img = req.body.data;
+    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
+    const img1 = await Jimp.read("./testimg.jpg");
+    const img2 = await Jimp.read("./heraldOfDarknessVocals.jpg");
+    img1.resize(img2.bitmap.width, img2.bitmap.height); // Resize img1 to match img2 dimensions
+    await img1.writeAsync("ferdig1.png"); // save
+    await img2.writeAsync("ferdig2.png"); // save
+
+    const img1Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig1.png'));
+    const img2Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig2.png'));
+
+    const img1Data = PNG.sync.read(img1Buffer);
+    const img2Data = PNG.sync.read(img2Buffer);
+    const { mssim, performance } = ssim(img1Data, img2Data);
+
+    res.send(`SSIM: ${mssim} (${performance}ms)`);
+
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
+  }
+});
+```
+
