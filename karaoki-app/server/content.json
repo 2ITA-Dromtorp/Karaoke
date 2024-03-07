@@ -1,46 +1,59 @@
 [
     {
       "vareNavn": "Gravemaskinsangen",
-      "lengde": "08:37",
-      "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul",
+      "lengde": "02:40",
+      "bilde": "/images/graveMaskinSangen.jpg",
       "artist": "Doktor Twinkleton",
-      "songPath": "/music/gravemaskinsangen.mp3",
+      "songPath": "/music/graveMaskinSangenInstrumental.mp3",
       "vokalPath": "/vocals/heraldOfDarknessVocals.mp3",
       "sangTekst": "Graver grøfter og dype hull \n Skuffen foran er alltid full \n Den løfter mange tunge lass \n De trives på en stor byggeplass \n Noen har belter og andre har hjul \n Vanligvis så er de knall oransje eller gul \n Den blir aldri sliten om dagen er lang \n Gravemaskiner fortjener en sang \n - Hei, Baba! \n - Uh? \n - Barn, vil dere synge og danse? \n - Mæ\n - Okei! Sett i gang, daaa! \n - Mæææ \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Én er god å ha når du bygger en bro \n Er jobben stor må du ha to \n De gjør bakken klar når man skal bygge et hus \n Ja enten bakken er av stein eller grus \n Diesel og bensin \n Stor, sterk og kjempefin \n Grav dypt i fantasi’n \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin",
-      "id":0
+      "id":0,
+      "easterEgg":false
     },
     {
       "vareNavn": "Never gonna give you up",
-      "lengde": "00:10",
-      "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul",
+      "lengde": "03:32",
+      "bilde": "/images/neverGonnaGiveYouUp.jpg",
       "artist": "Rick Astley",
       "songPath": "/music/neverGonnaGiveYouUpInstrumental.mp3",
       "vokalPath": "images/neverGonnaGiveYouUpVocals.jpg",
       "sangTekst": "We're no strangers to love \n You know the rules and so do I (do I) \n A full commitment's what I'm thinking of \n You wouldn't get this from any other guy \n I just wanna tell you how I'm feeling \n Gotta make you understand \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you \n We've known each other for so long \n Your heart's been aching, but you're too shy to say it (say it) \n Inside, we both know what's been going on (going on) \n We know the game and we're gonna play it \n And if you ask me how I'm feeling \n Don't tell me you're too blind to see \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you \n We've known each other for so long \n Your heart's been aching, but you're too shy to say it (to say it) \n Inside, we both know what's been going on (going on) \n We know the game and we're gonna play it \n I just wanna tell you how I'm feeling \n Gotta make you understand \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you \n Never gonna give you up \n Never gonna let you down \n Never gonna run around and desert you \n Never gonna make you cry \n Never gonna say goodbye \n Never gonna tell a lie and hurt you",
-      "id":1
+      "id":1,
+      "easterEgg":false
     },
         {
       "vareNavn": "I'm still standing",
-      "lengde": "03:00",
-      "bilde": "/images/placeholder_melvin.jpg",
-      "beskrivelse": "Veldig kul",
-      "artist": "Legg til senere",
-      "songPath": "/music/gravemaskinsangen.mp3",
-      "vokalPath": "/vocals/heraldOfDarknessVocals.mp3",
-      "sangTekst": "Graver grøfter og dype hull \n Skuffen foran er alltid full \n Den løfter mange tunge lass \n De trives på en stor byggeplass \n Noen har belter og andre har hjul \n Vanligvis så er de knall oransje eller gul \n Den blir aldri sliten om dagen er lang \n Gravemaskiner fortjener en sang \n - Hei, Baba! \n - Uh? \n - Barn, vil dere synge og danse? \n - Mæ\n - Okei! Sett i gang, daaa! \n - Mæææ \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Én er god å ha når du bygger en bro \n Er jobben stor må du ha to \n De gjør bakken klar når man skal bygge et hus \n Ja enten bakken er av stein eller grus \n Diesel og bensin \n Stor, sterk og kjempefin \n Grav dypt i fantasi’n \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin",
-      "id":2
+      "lengde": "03:02",
+      "bilde": "/images/imStillStanding.jpg",
+      "artist": "Elton John",
+      "songPath": "/music/imStillStandingInstrumental.mp3",
+      "vokalPath": "/vocals/imStillStandingVocals.jpg",
+      "sangTekst": "You could never know what it's like \n Your blood like winter freezes just like ice \n And there's a cold lonely light that shines from you \n You'll wind up like the wreck you hide behind that mask you use \n And did you think this fool could never win? \n Well, look at me, I'm a-coming back again \n I got a taste of love in a simple way \n And if you need to know while I'm still standing you just fade away \n Don't you know I'm still standing better than I ever did? \n Looking like a true survivor, feeling like a little kid \n And I'm still standing after all this time \n Picking up the pieces of my life without you on my mind \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n Once I never could've hoped to win You're starting down the road leaving me again \n The threats you made were meant to cut me down \n And if our love was just a circus you'd be a clown by now \n You know I'm still standing better than I ever did \n Looking like a true survivor, feeling like a little kid \n I'm still standing after all this time \n Picking up the pieces of my life without you on my mind \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n Don't you know that I'm still standing better than I ever did? \n Looking like a true survivor, feeling like a little kid \n And I'm still standing after all this time \n Picking up the pieces of my life without you on my mind \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah \n I'm still standing. Yeah, yeah, yeah",
+      "id":2,
+      "easterEgg":false
     },
         {
       "vareNavn": "Toreador March",
-      "lengde": "03:00",
-      "bilde": "/images/placeholder_melvin.jpg",
+      "lengde": "00:11",
+      "bilde": "/images/toreadorMarch.jpg",
+      "artist": "Polsk Mann 🇵🇱",
+      "songPath": "/music/fazbear.mp3",
+      "vokalPath": "/images/fazbearVocal.jpg",
+      "sangTekst": "Hur hur hur hur",
+      "id":3,
+      "easterEgg":false
+    }
+    ,
+        {
+      "vareNavn": "Herald of Darkness",
+      "lengde": "08:37",
+      "bilde": "/images/heraldOfDarkness.jpg",
       "beskrivelse": "Veldig kul",
-      "artist": "TBD",
-      "songPath": "/music/gravemaskinsangen.mp3",
-      "vokalPath": "/vocals/heraldOfDarknessVocals.mp3",
-      "sangTekst": "Graver grøfter og dype hull \n Skuffen foran er alltid full \n Den løfter mange tunge lass \n De trives på en stor byggeplass \n Noen har belter og andre har hjul \n Vanligvis så er de knall oransje eller gul \n Den blir aldri sliten om dagen er lang \n Gravemaskiner fortjener en sang \n - Hei, Baba! \n - Uh? \n - Barn, vil dere synge og danse? \n - Mæ\n - Okei! Sett i gang, daaa! \n - Mæææ \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Én er god å ha når du bygger en bro \n Er jobben stor må du ha to \n De gjør bakken klar når man skal bygge et hus \n Ja enten bakken er av stein eller grus \n Diesel og bensin \n Stor, sterk og kjempefin \n Grav dypt i fantasi’n \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin \n Woohoo, gravemaskin \n Stor, sterk og kjempefin \n Woohoo, gravemaskin \n Grav med din gravemaskin",
-      "id":3
+      "artist": "Alan Wake",
+      "songPath": "/music/heraldOfDarknessInstrumental.mp3",
+      "vokalPath": "/images/heraldOfDarknessVocals.mp3",
+      "sangTekst": "From what I've gathered you grew up nice and sheltered \n With mama's pretty stories and your own made up furies \n And mama gave me a magic clicker \n Well yes, I think it's true and fair to say \n C'mon in and listen, lost words you've been missing \n Of the fire you're bearing, the eye of the darkness, your light \n So you were drawn to stories early on \n My dreams would light up my imagination \n And you had nightmares night and day \n Yeah, but with the clicker I chased those frights away \n Who knew? \n So true \n So here is a clue of hope to remember \n Visions they come true obeying the light switch too \n Show me the Champion of Light \n I'll show you the Herald of Darkness \n Lost in a never ending night \n Diving deep to the surface \n    And all your stories of crime and chilling thrillers \n  hardboiled killers became bestsellers \n It was all too much, I had to get away \n The story's the end all, a piece of true fiction \n Made meaningless in the face of creation \n But there is more to it than meets the eye \n I never meant for it to ruin my life that way \n Would you say you lived a jaded lie \n Dark shades could never save the day \n So sad, \n But true \n Fighting the nightmares, torch and a light switch \n A gift or a curse, a reality made of dreams \n Show me the Champion of Light... \n He could write a new story like Tom Zane before him \n And maybe they'd be happy once again \n Just one shot, one more chance for him to save their marriage \n Away from the city, a romantic getaway \n Still he's the torch bearer and it couldn't be much clearer \n A war needs its warrior, true and right \n But the darkness within him held her hostage \n Had he seen her drowning, would have save her from the darkness of the lake \n Show me the Champion of Light... \n Such a Dark Place? Am I trapped in here \n Is this real? I cannot remember \n There was a manuscript it held a key \n A vicious cycle I must not surrender to \n Echo scenes to seek out \n Again and again \n Until I figure it out \n To bring this song to its end",
+      "id":4,
+      "easterEgg":true
     }
 ]

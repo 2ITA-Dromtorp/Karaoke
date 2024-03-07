@@ -7,23 +7,14 @@ const PNG = require('pngjs').PNG;
 const textTest = require('./content.json');
 const path = require('path');
 const Jimp = require("jimp");
-const { text } = require('body-parser');
 
 
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json({ limit: '50mb' }));
-// const proxy = require('http-proxy-middleware');
- 
-// module.exports = function (app) {
-//     app.use(proxy('/', {
-// target: 'http://mulighet.no:8080',
-//         logLevel: 'debug',
-//         changeOrigin: true
-//     }));
-// };
 
-app.post('/creator', async (req, res) => {
+
+app.post('/creator', async (req, res) => { // gjør om base64 til adminExport.jpg og sjekker om det funker
 
   try {
     const img = req.body.data;
@@ -53,7 +44,7 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 
 
 
-app.post('/ssim', async (req, res) => {
+app.post('/ssim', async (req, res) => { 
   try {
     const img = req.body.data;
     const songId = req.body.id
@@ -72,7 +63,7 @@ app.post('/ssim', async (req, res) => {
     const img2Data = PNG.sync.read(img2Buffer);
     const { mssim, performance } = ssim(img1Data, img2Data);
 
-    res.send(`SSIM: ${mssim} (${performance}ms)`);
+    res.send(`${Math.floor(mssim * 10000)} Poeng`);
 
   } catch (error) {
     res.status(500).send('Internal Server Error');

@@ -5,39 +5,52 @@ import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
 import { useEffect, useState} from "react";
  function Song() {
     const {songName} = useParams();
-    console.log(songName)
     let test = 2
 
 
-    // const [songArray, setSongArray] = useState("");
     const [content, setContent] = useState({});
     const [imgClass, setImgClass] = useState("bilde");
-    const [testVerdi, setTestVerdi] = useState(0);
+    const [score, setScore] = useState();
 
         const getText = async() => {
             await axios
             .get("/getText")
             .then(response => {
-                console.log(response)
                 let vareArray = response.data;
-                // console.log(vareArray.headerText)
-                    // const songProfile = vareArray.find((song) => song.vareNavn === songName);
                     setContent(vareArray.find((song) => song.vareNavn === songName));
-                              // console.log(content.lengde)
 
             })
             .catch(error => console.log(error));
         };
+        const pauseButton = document.querySelector('#pause')
+        if (content.easterEgg === true) {
+            function redSong() {
+                
 
+            const songDivStyler = document.querySelector('#song')
+            songDivStyler.classList.add('redSong')
 
+            const navBarStyler = document.querySelector('#karaokeHeaders')
+            navBarStyler.classList.add('redNav')
+
+            const recordButtonStyler = document.querySelector('#record')
+            recordButtonStyler.classList.add('redRecord')
+
+            const pauseButtonStyler = document.querySelector('#pause')
+            pauseButtonStyler.classList.add('redRecord')
+
+            const micSelectStyler = document.querySelector('#mic-select')
+            micSelectStyler.classList.add('redMic')
+        }
+        redSong()
+        }
 
         useEffect(() => {
-          console.log(content.lengde)
         if(!content.lengde) return;
 
         let wavesurfer, record
         let scrollingWaveform = false
-        // console.log(vareArray)
+
         
         const createWaveSurfer = (content, songProfile, vareArray) => {
         // Create an instance of WaveSurfer
@@ -46,7 +59,7 @@ import { useEffect, useState} from "react";
         }
         wavesurfer = WaveSurfer.create({
             container: '#mic',
-            waveColor: 'white',
+            waveColor: '#4F4A85',
             progressColor: 'orange',
             sampleRate: 20000
         })
@@ -109,8 +122,14 @@ import { useEffect, useState} from "react";
             record.stopRecording()
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
                 let dataToSend = imgExport[0]
+                recButton.classList.add("shown")
+                pauseButton.classList.remove("shown")
+                pauseButton.classList.add("hidden")
             
                     axios.post("/ssim", {"data": dataToSend, "id":content.id})
+                    .then(response => {
+                        setScore(response.data)
+                    })
                     .catch(error => {
                       console.error('Error sending the POST request:', error);
                     });
@@ -119,6 +138,19 @@ import { useEffect, useState} from "react";
 
 
 
+        pauseButton.onclick = () => {
+          if (record.isPaused()) {
+            record.resumeRecording()
+            audio.play();
+            pauseButton.textContent = 'Pause'
+            return
+          }
+        
+          record.pauseRecording()
+          audio.pause();
+          pauseButton.textContent = 'Resume'
+          pauseButton.classList.add("shown")
+        }
         
         const micSelect = document.querySelector('#mic-select')
         {
@@ -134,12 +166,16 @@ import { useEffect, useState} from "react";
         }
         // Record button: finn ut hvor lyd waveform blir laget og gjør om til base64
         const recButton = document.querySelector('#record')
-        
-        recButton.onclick = () => {
           var audio = new Audio(content.songPath);
+        recButton.onclick = () => {
           audio.play();
+          pauseButton.classList.add("shown")
+          recButton.classList.remove("shown")
+          recButton.classList.add("hidden")
+
         if (record.isRecording() || record.isPaused()) {
             record.stopRecording()
+            audio.pause();
             recButton.textContent = 'Record'
             return
         }
@@ -151,7 +187,7 @@ import { useEffect, useState} from "react";
         // get selected device
         const deviceId = micSelect.value
         record.startRecording({ deviceId }).then(() => {
-            recButton.textContent = 'Stop'
+            recButton.textContent = 'Record'
             recButton.disabled = false
             setImgClass("bilde spinningimg")
         })
@@ -161,32 +197,36 @@ import { useEffect, useState} from "react";
         createWaveSurfer()
         
         }
-        
+
         createWaveSurfer()
         
     },[content])
 
     useEffect(() => {
         getText()
+
+
     }, [onloadstart])
 
 
     return (<div className="karaokeWrapper">
-      <div className="karaokeSong" id="karaokeSong">
-      {/* <div id="songDiv"></div> */}
+      <div className="karaokeSong" id="song">
         
-         <img src={content.bilde} className={imgClass}/>
+         <img src={content.bilde} className={imgClass} id="bilde"/>
          <h1>{content.vareNavn}</h1>
         
         <h2 className="songSubHeader">{content.artist}</h2>
         <p className="pText">{content.lengde}</p>
 
+        <h2 className="songSubHeader">{score}</h2>
+
         <button id="record" className="record">Record</button>
+        <button id="pause" className="record hidden">Pause</button>
 
         <select id="mic-select" className="mic">
             <option value="" hidden>Select mic</option>
             </select>
-        <label><input type="checkbox"  /> Scrolling waveform</label>
+        <label className="hidden"><input type="checkbox"  /> Scrolling waveform</label>
         
         <p id="progress">00:00</p>
         
@@ -196,7 +236,6 @@ import { useEffect, useState} from "react";
         <div id="mic" className="micey"></div>
 
         <div id="recordings" className="recordingsey"></div> 
-    {/* <button onclick={updateTimes()}></button> */}
 
 
 

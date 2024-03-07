@@ -5,38 +5,33 @@ import SongCard from './SongCard';
 
 function HomePage() {
     const [songArray, setSongArray] = useState([]);
-    let [text, setText] = useState("");
-
-
   
-  const getText = async () => {
+  const getText = async () => { //henter getText (content.json) fra backend 
     await axios
       .get("/getText")
       .then(response => {
-        console.log(response)
         let vareArray = response.data;
-        console.log(vareArray)
         setSongArray(response.data);
-        console.log(songArray)
       })
       
       .catch(error => console.log(error));
   };
   useEffect(() => {
     getText()
-  }, [onloadstart])
+  }, [onloadstart]) //getText kjøres bare når den loades
 
     return (
       <div className="karaokeWrapper">
         <div className='songWrapper'>
           <div className='karaokeSongs' id='karaokeSongs'>  
-            {songArray.length > 0 &&songArray.map((sang, index) => (
-                <SongCard name={sang.vareNavn} sangNavn={sang.vareNavn} key={index} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse}/>
-            ))}
+            {songArray.length > 0 &&songArray.map((sang, index) => ( 
+                <SongCard name={sang.vareNavn} sangNavn={sang.vareNavn} index={index} lengde={sang.lengde} bilde={sang.bilde} beskrivelse={sang.beskrivelse} easterEgg={sang.easterEgg}/>
+            ))} {/* hvis lengden på songArray er lenger enn 0 så lager den ett SongCard element for hvert objekt som er i arrayet. */}
           </div> 
         </div>
       </div>
     );
 }
+
 
 export default HomePage;

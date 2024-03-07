@@ -4,9 +4,9 @@ function NavBar() {
 
     
     return (
-    <div on className='karaokeHeader'>
-    <Link to="/">
-    <h1 style={{color: 'white'}}>Karaoke🎤</h1>
+    <div on className='karaokeHeader' id="karaokeHeaders">
+    <Link to="/" className="karaokeHeaderText">
+    <h1>Karaoke🎤</h1>
     </Link>
     </div>
     )

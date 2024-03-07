@@ -15,6 +15,11 @@
   justify-content: center;
 }
 
+.karaokeHeaderText {
+  color: white;
+  text-decoration: none;
+}
+
 
 
 
@@ -41,6 +46,7 @@
   /* flex-direction: column; */
 }
 
+
 .karaokeSong {
   display: flex;
   flex-direction: column;
@@ -53,13 +59,19 @@
   /* padding-top: 3vh; */
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(238,155,176,1) 100%);
   /* flex-direction: column; */
+
+
 } 
+
+
+
+
 
 .karaokeCard {
 
   /* justify-content: center; */
   /* align-items: center; */
-  height: 45vh;
+  height: fit-content;
   width: 70%;
   margin-bottom: 1vh;
   background-color: #222725;
@@ -115,6 +127,7 @@
 
 .mic {
   width: 100%;
+  height: 6vh;
   border-radius: 10px;
   /* background-color: burlywood; */
 }
@@ -134,7 +147,39 @@
 }
 
 
+.redNav {
+  background-color: black;
+  border-bottom: white 1px solid;
+}
 
+.redSong {
+  background: linear-gradient(0deg, rgba(255,0,0,1) 0%, rgba(0,0,0,1) 100%);
+  color: white;
+}
+
+.redRecord {
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  border: none;
+  border-bottom: 3px solid white;
+}
+
+.redMic {
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  border: none;
+  border-bottom: 3px solid white;
+}
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
 
 
 @media screen and (orientation: landscape) {
