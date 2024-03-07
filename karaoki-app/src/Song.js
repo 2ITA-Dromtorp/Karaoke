@@ -70,6 +70,10 @@ import { useEffect, useState} from "react";
         record.on('record-end', (blob) => {
             const container = document.querySelector('#recordings')
             const recordedUrl = URL.createObjectURL(blob)
+
+            //   return () => {
+            //       wavesurfer.destroy(); //cleanup funksjon - bryter kobling med wavesurfer server
+            //   };
             setImgClass("bilde")
             // Create wavesurfer from the recorded audio
             const wavesurfer = WaveSurfer.create({
@@ -116,8 +120,6 @@ import { useEffect, useState} from "react";
             .join(':')
 
         progress.textContent = formattedTime
-        console.log(formattedTime)
-        console.log(content.lengde)
         if (formattedTime == content.lengde) {
             record.stopRecording()
                 const imgExport = await wavesurfer.exportImage('image/jpeg'); // Export the image data
@@ -237,7 +239,7 @@ import { useEffect, useState} from "react";
 
         <div id="recordings" className="recordingsey"></div> 
 
-
+        <div id="waveform"></div>
 
 
       </div>
