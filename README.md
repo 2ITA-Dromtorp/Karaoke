@@ -28,7 +28,7 @@ import WaveSurfer from 'wavesurfer.js';
     container: '#mic',
     waveColor: '#FFFF00',
     progressColor: 'orange',
-    sampleRate: 5000,
+    sampleRate: 20000,
 })
 ```
    * **wavesurfer** = WaveSurfer.create({}) gives the variable wavesurfer a waveform value. This changes according to the paramethers set in the function above.
@@ -48,8 +48,6 @@ import WaveSurfer from 'wavesurfer.js';
             .join(':')
             /* Super fancy måte å formatere tid på. Dette gjøres sånn at vi kan skrive sangvarighet i JSON på en enkel måte. Altså "08:37" istedet for å måle i sekunder eller milisekunder. */
         progress.textContent = formattedTime
-        console.log(songArray)
-        console.log(formattedTime)
         if (formattedTime == songArray) {
             /* Hvis det har gått like mye tid under opptaket som verdien til lengde i JSON, så */
             record.stopRecording()
@@ -104,27 +102,30 @@ app.get('/getText', (req, res) => {
 #### Converts jpg to png and compares the similarity between the new picture and the original using the **ssim** method
 
 ```js
-app.post('/ssim', async (req, res) => {
+app.post('/ssim', async (req, res) => { 
   try {
-    const img = req.body.data;
-    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'});
-    const img1 = await Jimp.read("./testimg.jpg");
-    const img2 = await Jimp.read("./heraldOfDarknessVocals.jpg");
+    const img = req.body.data; // Get the image data from the request body
+    const songId = req.body.id // Get the song ID from the request body
+    console.log(songId) // Log the song ID to the console
+    fs.writeFileSync("testimg.jpg", img.split(";base64,").pop(), {encoding: 'base64'}); // Write the image data to a file
+    const img1 = await Jimp.read("./testimg.jpg"); // Read the image from the file
+    const img2 = await Jimp.read(textTest[songId].vokalPath); // Read another image from the file based on the song ID
     img1.resize(img2.bitmap.width, img2.bitmap.height); // Resize img1 to match img2 dimensions
-    await img1.writeAsync("ferdig1.png"); // save
-    await img2.writeAsync("ferdig2.png"); // save
+    await img1.writeAsync("ferdig1.png"); // Save img1 to a file
+    await img2.writeAsync("ferdig2.png"); // Save img2 to a file
 
-    const img1Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig1.png'));
-    const img2Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig2.png'));
+    const img1Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig1.png')); // Read the saved img1 file
+    const img2Buffer = await fs.promises.readFile(path.join(__dirname, 'ferdig2.png')); // Read the saved img2 file
 
-    const img1Data = PNG.sync.read(img1Buffer);
-    const img2Data = PNG.sync.read(img2Buffer);
-    const { mssim, performance } = ssim(img1Data, img2Data);
+    const img1Data = PNG.sync.read(img1Buffer); // Read the data from img1 file
+    const img2Data = PNG.sync.read(img2Buffer); // Read the data from img2 file
+    const { mssim, performance } = ssim(img1Data, img2Data); // Calculate the structural similarity index
 
-    res.send(`SSIM: ${mssim} (${performance}ms)`);
+    res.send(`${Math.floor(mssim * 10000)} Poeng`); // Send the calculated similarity score as the response
 
   } catch (error) {
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Internal Server Error'); // Send an error response if an error occurs
+    console.log(error) // Log the error to the console
   }
 });
 ```
