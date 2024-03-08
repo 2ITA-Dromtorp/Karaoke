@@ -2,10 +2,10 @@
 FROM node:18
 
 # Set the working directory in the container
-WORKDIR /karaoki-app
+WORKDIR /Karaoke
 
 # Copy the application files into the working directory
-COPY . /karaoki-app
+COPY . /Karaoke
 
 # Install the application dependencies
 RUN npm install
