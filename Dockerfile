@@ -1,31 +1,27 @@
-# Use the official Node.js image as the base image
-FROM node:18
+# Use the official lightweight Node.js 18 image.
+FROM node:18-slim
 
 # Set the working directory in the container
-# It's not necessary to repeat the /Karaoke destination
-WORKDIR /Karaoke
+WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (if available) first to leverage Docker cache
-# This avoids re-running npm install on every build unless these files change
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Install the application dependencies
-RUN npm install
+# Install production dependencies.
+RUN npm install --only=production
 
-# Copy the rest of the application files into the working directory
+# Copy the rest of the application source code
 COPY . .
 
 # Build the React application
-# If this is a production build, we might want to use the `npm run build` command
-# If it is a backend API, we might not need this step at all
 RUN npm run build
 
-# If we built a frontend application, this step may not be necessary as we would use a server like nginx or a CDN to serve the static files.
-# If it is a backend API, we would proceed to the startup command
-# The final image should ideally be based on what the application role is (frontend vs backend)
-
-# Expose the port that the application runs on
+# The application's port.
 EXPOSE 3000
 
-# Define the entry point for the container
-CMD ["npm", "start"]
+# Serve the app using "serve" from the build directory
+# First, install the "serve" package globally.
+RUN npm install -g serve
+
+# Command to serve the build folder on the specified port
+CMD ["serve", "-s", "build", "-l", "3000"]
